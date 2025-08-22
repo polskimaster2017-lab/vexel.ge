@@ -1,7 +1,28 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Phone, Mail, Facebook, Instagram, Linkedin } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const Contact = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const contactInfo = [
     {
       icon: Phone,
@@ -36,9 +57,11 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-background">
+    <section id="contact" ref={sectionRef} className="py-20 bg-gradient-to-br from-background to-secondary/20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             კონტაქტი
           </h2>
@@ -52,9 +75,15 @@ const Contact = () => {
             {contactInfo.map((contact, index) => {
               const IconComponent = contact.icon;
               return (
-                <Card key={index} className="group hover:shadow-card transition-all duration-300 border-border/50">
+                <Card 
+                  key={index} 
+                  className={`group hover-lift hover-glow bg-gradient-card border-border/50 transition-all duration-700 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  }`}
+                  style={{ transitionDelay: `${index * 200}ms` }}
+                >
                   <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-primary rounded-2xl flex items-center justify-center">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-primary rounded-2xl flex items-center justify-center hover-scale animate-scale-in">
                       <IconComponent className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-xl font-semibold mb-2 text-foreground">
@@ -62,7 +91,7 @@ const Contact = () => {
                     </h3>
                     <a 
                       href={contact.href}
-                      className="text-muted-foreground hover:text-primary transition-colors font-medium"
+                      className="text-muted-foreground hover:text-primary transition-colors font-medium hover-scale inline-block"
                     >
                       {contact.value}
                     </a>
@@ -72,11 +101,13 @@ const Contact = () => {
             })}
           </div>
           
-          <div className="text-center">
-            <h3 className="text-2xl font-semibold mb-6 text-foreground">
+          <div className={`text-center transition-all duration-1000 delay-400 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <h3 className="text-2xl font-semibold mb-8 text-foreground">
               სოციალური ქსელები
             </h3>
-            <div className="flex justify-center space-x-6">
+            <div className="flex justify-center space-x-8">
               {socialLinks.map((social, index) => {
                 const IconComponent = social.icon;
                 return (
@@ -85,9 +116,10 @@ const Contact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-muted hover:bg-primary rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                    className={`w-14 h-14 bg-muted hover:bg-primary rounded-2xl flex items-center justify-center transition-all duration-500 hover-scale hover-glow group animate-scale-in`}
+                    style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <IconComponent className="w-6 h-6 text-muted-foreground group-hover:text-white transition-colors" />
+                    <IconComponent className="w-7 h-7 text-muted-foreground group-hover:text-white transition-colors duration-300" />
                   </a>
                 );
               })}

@@ -39,12 +39,16 @@ All colors MUST be HSL.
 
     /* Custom design tokens */
     --gradient-primary: linear-gradient(135deg, hsl(0 84% 60%), hsl(0 74% 70%));
-    --gradient-hero: linear-gradient(135deg, hsl(0 84% 60%), hsl(0 74% 70%), hsl(0 94% 75%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.9), hsl(0 0% 98% / 0.6));
-    --shadow-elegant: 0 10px 30px -10px hsl(0 84% 60% / 0.15);
-    --shadow-glow: 0 0 40px hsl(0 74% 70% / 0.2);
-    --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.05);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --gradient-hero: linear-gradient(135deg, hsl(0 84% 60%) 0%, hsl(0 74% 70%) 50%, hsl(0 94% 75%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.95), hsl(0 0% 98% / 0.8));
+    --gradient-button: linear-gradient(135deg, hsl(0 84% 60%), hsl(0 74% 65%));
+    --gradient-button-hover: linear-gradient(135deg, hsl(0 90% 65%), hsl(0 80% 70%));
+    --shadow-elegant: 0 20px 60px -20px hsl(0 84% 60% / 0.25);
+    --shadow-glow: 0 0 60px hsl(0 74% 70% / 0.3);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.08);
+    --shadow-button: 0 4px 20px hsl(0 84% 60% / 0.3);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.5rem;
 
@@ -112,5 +116,150 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     font-family: 'BPG Nino Mtavruli', 'Arial', sans-serif;
+  }
+}
+
+@layer components {
+  /* Animation classes */
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .hover-lift:hover {
+    @apply transform -translate-y-2 shadow-elegant;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 ease-out;
+  }
+  
+  .hover-scale:hover {
+    @apply scale-105;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .hover-glow:hover {
+    @apply shadow-glow;
+  }
+  
+  /* Premium button styles */
+  .btn-premium {
+    @apply bg-gradient-button text-white font-medium px-6 py-3 rounded-xl;
+    @apply shadow-button transition-all duration-300 ease-out;
+    @apply hover:bg-gradient-button-hover hover:shadow-glow hover:scale-105;
+    @apply active:scale-95;
+  }
+  
+  .btn-premium-outline {
+    @apply border-2 border-primary text-primary bg-transparent font-medium px-6 py-3 rounded-xl;
+    @apply transition-all duration-300 ease-out;
+    @apply hover:bg-primary hover:text-white hover:shadow-button hover:scale-105;
+    @apply active:scale-95;
+  }
+  
+  /* Scroll animations */
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .scroll-animate.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Navigation animations */
+  .nav-item {
+    @apply relative transition-all duration-300 ease-out;
+  }
+  
+  .nav-item::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary;
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .nav-item:hover::after {
+    @apply w-full;
+  }
+  
+  .nav-item:hover {
+    @apply text-primary;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(0 84% 60% / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(0 84% 60% / 0.8);
   }
 }
