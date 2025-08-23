@@ -30,7 +30,7 @@ const Hero = () => {
       id="home" 
       className="min-h-screen flex items-start justify-center relative overflow-hidden pt-32"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 30%, rgba(0, 0, 0, 0.05) 70%, transparent 100%), url(${programmerWorkspace})`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 30%, transparent 60%), url(/lovable-uploads/c31b6ea8-f9a7-4913-b1e1-0ce5fda56675.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
