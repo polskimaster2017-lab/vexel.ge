@@ -20,6 +20,7 @@ export default {
 		extend: {
 			fontFamily: {
 				'georgian': ['BPG Nino Mtavruli', 'Arial', 'sans-serif'],
+				'noto-georgian': ['Noto Sans Georgian', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
