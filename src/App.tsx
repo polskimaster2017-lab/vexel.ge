@@ -1,27 +1,75 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "@/components/Header";
+import Index from "@/pages/Index";
+import NotFound from "@/pages/NotFound";
+import { ModalProvider, useModal } from "@/contexts/ModalContext";
 
-const queryClient = new QueryClient();
+function AppContent() {
+  const { openContactModal } = useModal();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+  useEffect(() => {
+    // Глобальный обработчик для всех кнопок открытия модального окна
+    const handleContactModalButtons = () => {
+      const buttons = document.querySelectorAll('.js-open-contact-modal');
+      
+      buttons.forEach(button => {
+        // Удаляем старые обработчики
+        button.removeEventListener('click', openContactModal);
+        // Добавляем новый обработчик
+        button.addEventListener('click', openContactModal);
+      });
+    };
+
+    // Запускаем обработчик после загрузки DOM
+    handleContactModalButtons();
+
+    // Обработчик для динамически добавленных элементов
+    const observer = new MutationObserver(() => {
+      handleContactModalButtons();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    return () => {
+      observer.disconnect();
+      // Очищаем обработчики при размонтировании
+      const buttons = document.querySelectorAll('.js-open-contact-modal');
+      buttons.forEach(button => {
+        button.removeEventListener('click', openContactModal);
+      });
+    };
+  }, [openContactModal]);
+
+  return (
+    <Router>
+      <div className="min-h-screen bg-black">
+        {/* Skip to main content link for accessibility */}
+        <a href="#main-content" className="skip-link">
+          გადადით მთავარ კონტენტზე
+        </a>
+        
+        <Header />
+        <main id="main-content">
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
+  );
+}
+
+function App() {
+  return (
+    <ModalProvider>
+      <AppContent />
+    </ModalProvider>
+  );
+}
 
 export default App;

@@ -1,122 +1,85 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Globe, ShoppingCart, User, Building } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Code, Globe, Search, Palette, Smartphone, Zap } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Services = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    const element = document.getElementById('services');
+    if (element) observer.observe(element);
 
     return () => observer.disconnect();
   }, []);
 
   const services = [
     {
-      title: "Landing Page",
-      price: "600₾",
-      description: "სწრაფი და ეფექტური ერთგვერდიანი საიტი, რომელიც იდეალურია პროდუქტებისა და აქციების წარსადგენად.",
       icon: Globe,
-      features: ["რესპონსიული დიზაინი", "SEO ოპტიმიზაცია", "სწრაფი ჩატვირთვა", "1 თვის მხარდაჭერა"]
+      title: "ვებსაიტების შექმნა",
+      description: "ჩვენ არ ვქმნით უბრალოდ ვებსაიტებს. ჩვენ ვუსმენთ თქვენს იდეებს და ვქმნით ციფრულ ინსტრუმენტს, რომელიც თქვენი ბიზნესის ზრდაზე იმუშავებს.",
+      gradient: "from-green-400 to-green-600"
     },
     {
-      title: "ბიზნეს საიტი",
-      price: "1200₾",
-      description: "პროფესიონალური საიტი თქვენი კომპანიისთვის, სასურველი გვერდებითა და სექციებით.",
-      icon: Building,
-      features: ["მრავალგვერდიანი", "ადმინ პანელი", "კონტაქტის ფორმა", "2 თვის მხარდაჭერა"]
+      icon: Search,
+      title: "SEO ოპტიმიზაცია",
+      description: "როდესაც მომხმარებელი Google-ში ეძებს თქვენს პროდუქტს, მან უნდა გიპოვოთ თქვენ და არა კონკურენტი. ჩვენ დაგეხმარებით, რომ თქვენი საიტი საძიებო სისტემის პირველ გვერდზე გამოჩნდეს.",
+      gradient: "from-orange-400 to-orange-600"
     },
     {
-      title: "ონლაინ მაღაზია",
-      price: "1800₾",
-      description: "მთელი ფუნქციონალით, გადახდის სისტემებითა და პროდუქტების კატალოგით.",
-      icon: ShoppingCart,
-      features: ["ონლაინ გადახდა", "პროდუქტების მართვა", "შეკვეთების სისტემა", "3 თვის მხარდაჭერა"]
-    },
-    {
-      title: "პორტფოლიო საიტი",
-      price: "900₾",
-      description: "კრეატიული პორტფოლიო დიზაინერების, ფოტოგრაფებისა და ხელოვანებისთვის.",
-      icon: User,
-      features: ["გალერეის ფუნქცია", "უნიკალური დიზაინი", "მობილური ვერსია", "1.5 თვის მხარდაჭერა"]
+      icon: Palette,
+      title: "კოპირაითინგი",
+      description: "შევქმნათ დამაჯერებელი და მიმზიდველი ტექსტები თქვენი ბიზნესის ყველა პლატფორმისთვის: ვებსაიტისთვის და ბლოგისთვის, სოციალური მედიისთვის, იმეილ-მარკეტინგისთვის, სარეკლამო მასალებისთვის",
+      gradient: "from-purple-400 to-purple-600"
     }
   ];
 
-  const scrollToConsultation = () => {
-    const element = document.getElementById('consultation');
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <section id="services" ref={sectionRef} className="py-20 bg-gradient-to-br from-secondary/20 to-background">
-      <div className="container mx-auto px-4">
-        <div className={`text-center mb-16 transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            სერვისები და ფასები
+    <section id="services" className="py-20 bg-black relative overflow-hidden">
+      {/* Background patterns */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-20 w-32 h-32 border border-green-400/20 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-24 h-24 border border-orange-400/15 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 w-16 h-16 border border-cyan-400/10 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-noto-georgian">
+            რას <span style={{color: '#5abd70'}}>გთავაზობთ?</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            აირჩიეთ თქვენთვის შესაფერისი ვებ-გვერდის ტიპი
+          <p className={`text-xl text-gray-400 max-w-3xl mx-auto font-noto-georgian transition-all duration-1000 ease-out delay-300 ${
+            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            ჩვენ ვთავაზობთ სრულ სპექტრს ვებ დეველოპმენტის სერვისებს
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => {
-            const IconComponent = service.icon;
-            return (
-              <Card 
-                key={index} 
-                className={`hover-lift hover-glow bg-gradient-card border-border/50 transition-all duration-700 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <CardHeader className="text-center pb-4">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-gradient-primary rounded-2xl flex items-center justify-center hover-scale animate-scale-in">
-                    <IconComponent className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
-                  <div className="text-3xl font-bold text-primary mb-2">{service.price}</div>
-                  <CardDescription className="text-sm leading-relaxed">
-                    {service.description}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent className="pt-0">
-                  <ul className="space-y-2 mb-6">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="text-sm text-muted-foreground flex items-center">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 animate-pulse-glow" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <Button 
-                    variant="outline" 
-                    className="w-full btn-premium-outline hover-scale"
-                    onClick={scrollToConsultation}
-                  >
-                    შეკვეთა
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className={`service-card transition-all duration-1000 ease-out ${
+                visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              <div className="service-icon">
+                <div className={`bg-gradient-to-r ${service.gradient} p-4 rounded-xl`}>
+                  <service.icon className="h-8 w-8 text-white" />
+                </div>
+              </div>
+              <h3 className="service-title">{service.title}</h3>
+              <p className="service-description">{service.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

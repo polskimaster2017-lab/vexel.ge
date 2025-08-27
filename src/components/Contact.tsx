@@ -27,14 +27,14 @@ const Contact = () => {
     {
       icon: Phone,
       label: "ტელეფონი",
-      value: "+995 555 12 34 56",
-      href: "tel:+995555123456"
+      value: "+995 599443357",
+      href: "tel:+995599443357"
     },
     {
       icon: Mail,
-      label: "ელ-ფოსტა",
-      value: "info@netoria.ge",
-      href: "mailto:info@netoria.ge"
+      label: "Email",
+      value: "vexelstudio1@gmail.com",
+      href: "mailto:vexelstudio1@gmail.com"
     }
   ];
 
