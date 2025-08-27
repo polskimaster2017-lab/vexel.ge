@@ -24,7 +24,7 @@ const Portfolio = () => {
     {
       title: "Prokhinkali",
       description: "საქართველოს ტრადიციული კერძების რესტორანი",
-      image: "/src/assets/Снимок экрана 2025-08-26 110440.png",
+      image: "/images/Снимок экрана 2025-08-26 110440.png",
       technologies: ["React", "Node.js", "MongoDB"],
       url: "https://prokhinkali.com",
       github: "#"
@@ -32,7 +32,7 @@ const Portfolio = () => {
     {
       title: "Simple Plants",
       description: "შინაური მცენარეების ონლაინ მაღაზია",
-      image: "/src/assets/Снимок экрана 2025-08-26 110500.png", 
+      image: "/images/Снимок экрана 2025-08-26 110500.png", 
       technologies: ["Next.js", "Tailwind CSS"],
       url: "https://simple-plants.ru",
       github: "#"
@@ -40,7 +40,7 @@ const Portfolio = () => {
     {
       title: "Melakuda Store",
       description: "საქართველოს ტრადიციული ნაკეთობების მაღაზია",
-      image: "/src/assets/Снимок экрана 2025-08-26 110539.png",
+      image: "/images/Снимок экрана 2025-08-26 110539.png",
       technologies: ["React", "Framer Motion"],
       url: "https://melakudastore.ge",
       github: "#"
@@ -48,7 +48,7 @@ const Portfolio = () => {
     {
       title: "IT-One",
       description: "IT კომპანიის კორპორატიული საიტი",
-      image: "/src/assets/Снимок экрана 2025-08-26 110605.png",
+      image: "/images/Снимок экрана 2025-08-26 110605.png",
       technologies: ["Vue.js", "Firebase"],
       url: "https://www.it-one.ru",
       github: "#"

@@ -119,7 +119,7 @@ const Header = () => {
                 className="social-icon-link"
               >
                 <img 
-                  src="/src/assets/icons8-facebook-messenger-48.png" 
+                  src="/images/icons8-facebook-messenger-48.png" 
                   alt="Facebook Messenger" 
                   className="social-icon" 
                   width="32" 
@@ -135,7 +135,7 @@ const Header = () => {
                 className="social-icon-link"
               >
                 <img 
-                  src="/src/assets/icons8-whatsapp-48.png" 
+                  src="/images/icons8-whatsapp-48.png" 
                   alt="WhatsApp" 
                   className="social-icon" 
                   width="32" 
@@ -188,7 +188,7 @@ const Header = () => {
                     className="social-icon-link"
                   >
                     <img 
-                      src="/src/assets/icons8-facebook-messenger-48.png" 
+                      src="/images/icons8-facebook-messenger-48.png" 
                       alt="Facebook Messenger" 
                       className="social-icon" 
                       width="32" 
@@ -204,7 +204,7 @@ const Header = () => {
                     className="social-icon-link"
                   >
                     <img 
-                      src="/src/assets/icons8-whatsapp-48.png" 
+                      src="/images/icons8-whatsapp-48.png" 
                       alt="WhatsApp" 
                       className="social-icon" 
                       width="32" 
