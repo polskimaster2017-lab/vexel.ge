@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import OptimizedImage from "./OptimizedImage";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,12 +46,13 @@ const Header = () => {
         <div className="flex items-center justify-between w-full h-16">
           {/* Logo */}
           <div className="pl-2 md:pl-0">
-            <img 
+            <OptimizedImage 
               src="/images/vixel-wordmark.svg" 
               alt="Vixel Logo" 
               width={120} 
               height={36} 
               className="flex-shrink-0"
+              priority={true}
             />
           </div>
 
@@ -79,12 +81,12 @@ const Header = () => {
                 aria-label="Chat on Facebook Messenger" 
                 className="social-icon-link"
               >
-                <img 
+                <OptimizedImage 
                   src="/images/icons8-facebook-messenger-48.png" 
                   alt="Facebook Messenger" 
                   className="social-icon" 
-                  width="32" 
-                  height="32" 
+                  width={32} 
+                  height={32} 
                   loading="lazy"
                 />
               </a>
@@ -95,12 +97,12 @@ const Header = () => {
                 aria-label="Chat on WhatsApp" 
                 className="social-icon-link"
               >
-                <img 
+                <OptimizedImage 
                   src="/images/icons8-whatsapp-48.png" 
                   alt="WhatsApp" 
                   className="social-icon" 
-                  width="32" 
-                  height="32" 
+                  width={32} 
+                  height={32} 
                   loading="lazy"
                 />
               </a>
@@ -148,12 +150,12 @@ const Header = () => {
                     aria-label="Chat on Facebook Messenger" 
                     className="social-icon-link"
                   >
-                    <img 
+                    <OptimizedImage 
                       src="/images/icons8-facebook-messenger-48.png" 
                       alt="Facebook Messenger" 
                       className="social-icon" 
-                      width="32" 
-                      height="32" 
+                      width={32} 
+                      height={32} 
                       loading="lazy"
                     />
                   </a>
@@ -164,12 +166,12 @@ const Header = () => {
                     aria-label="Chat on WhatsApp" 
                     className="social-icon-link"
                   >
-                    <img 
+                    <OptimizedImage 
                       src="/images/icons8-whatsapp-48.png" 
                       alt="WhatsApp" 
                       className="social-icon" 
-                      width="32" 
-                      height="32" 
+                      width={32} 
+                      height={32} 
                       loading="lazy"
                     />
                   </a>

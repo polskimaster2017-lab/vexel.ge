@@ -8,7 +8,8 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&family=BPG+Nino+Mtavruli:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&family=BPG+Nino+Mtavruli:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&family=BPG+Nino+Mtavruli:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
     
     <!-- Primary Meta Tags -->
     <meta name="description" content="Vixel ქმნის თანამედროვე, სწრაფ და SEO-მეგობრულ ვებსაიტებს საქართველოში." />
@@ -46,28 +47,109 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://vixel.ge" />
     
+    <!-- Resource hints for better performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="preload" href="/images/vixel-wordmark.svg" as="image" type="image/svg+xml">
+    
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Vixel Studio",
+      "@type": "LocalBusiness",
+      "name": "Vixel",
       "url": "https://vixel.ge",
-      "logo": "https://vixel.ge/images/logo.png",
-      "description": "პროფესიონალური ვებ-გვერდების შექმნა და დეველოპმენტი",
+      "email": "vixelgeo@gmail.com",
+      "logo": "https://vixel.ge/images/vixel-wordmark.svg",
+      "description": "Vixel ქმნის თანამედროვე, სწრაფ და SEO-მეგობრულ ვებსაიტებს საქართველოში.",
       "address": {
         "@type": "PostalAddress",
+        "addressLocality": "Tbilisi",
         "addressCountry": "GE"
       },
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+995599443357",
-        "contactType": "customer service",
+        "contactType": "customer support",
         "email": "vixelgeo@gmail.com"
       },
       "sameAs": [
         "https://facebook.com/vixelstudio",
         "https://instagram.com/vixelstudio"
+      ]
+    }
+    </script>
+    
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "მთავარი",
+          "item": "https://vixel.ge"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "სერვისები",
+          "item": "https://vixel.ge/#services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "პორტფოლიო",
+          "item": "https://vixel.ge/#portfolio"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "ტარიფები",
+          "item": "https://vixel.ge/#pricing"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "კონტაქტი",
+          "item": "https://vixel.ge/#contact"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "რამდენი ღირს საიტის გაკეთება?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "საიტის ფასი დამოკიდებულია მის სირთულეზე და ფუნქციონალზე. ჩვენ ვთავაზობთ სხვადასხვა ტარიფს 500-დან 2000 ლარამდე. დეტალური ფასების სია შეგიძლიათ იხილოთ ტარიფების განყოფილებაში."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "რამდენ ხანში მზად იქნება საიტი?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "მარტივი საიტი მზად იქნება 3-5 დღეში, ხოლო რთული პროექტი 2-3 კვირაში. ზუსტი ვადები დამოკიდებულია პროექტის მოთხოვნებზე და ფუნქციონალზე."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "გთავაზობთ მხარდაჭერას საიტის გაშვების შემდეგ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "დიახ, ჩვენ ვთავაზობთ სრულ მხარდაჭერას საიტის გაშვების შემდეგ. ეს მოიცავს ტექნიკურ მხარდაჭერას, განახლებებს და უსაფრთხოების ზომებს."
+          }
+        }
       ]
     }
     </script>

@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Facebook, Instagram, Code } from "lucide-react";
+import OptimizedImage from "./OptimizedImage";
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="mb-6">
               <div className="flex items-center mb-4 group">
-                <img 
+                <OptimizedImage 
                   src="/images/vixel-wordmark.svg" 
                   alt="Vixel Logo" 
                   width={140} 

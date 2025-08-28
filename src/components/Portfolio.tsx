@@ -1,5 +1,6 @@
 import { ExternalLink, Github } from "lucide-react";
 import { useEffect, useState } from "react";
+import OptimizedImage from "./OptimizedImage";
 
 const Portfolio = () => {
   const [visible, setVisible] = useState(false);
@@ -86,10 +87,12 @@ const Portfolio = () => {
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <div className="portfolio-image">
-                <img 
+                <OptimizedImage 
                   src={project.image} 
                   alt={project.title}
                   className="portfolio-screenshot"
+                  fill={true}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="portfolio-overlay">
                   <div className="portfolio-links">
