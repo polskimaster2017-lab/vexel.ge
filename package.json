@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "type-check": "tsc --noEmit",
-    "analyze": "vite build --mode analyze"
+    "analyze": "vite build --mode analyze",
+    "postbuild": "node scripts/generate-sitemap.cjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
