@@ -44,7 +44,7 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center group">
+          <div className="flex items-center justify-start md:justify-center group ml-2 md:ml-0">
             <img 
               src="/images/vixel-wordmark.svg" 
               alt="Vixel Logo" 
@@ -110,7 +110,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-white p-2"
+            className="md:hidden text-white p-2 ml-auto"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
