@@ -16,7 +16,7 @@ interface Web3FormsResponse {
 }
 
 // Константы для конфигурации
-const WEB3FORMS_ACCESS_KEY = '79943bb2-d733-4ed4-849e-71285f3c0bd8';
+const WEB3FORMS_ACCESS_KEY = '2d7ea600-afcc-44cb-a706-1adb588a6eac';
 
 const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);

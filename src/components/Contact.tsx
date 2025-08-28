@@ -33,8 +33,8 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "vexelstudio1@gmail.com",
-      href: "mailto:vexelstudio1@gmail.com"
+      value: "vixelgeo@gmail.com",
+      href: "mailto:vixelgeo@gmail.com"
     }
   ];
 

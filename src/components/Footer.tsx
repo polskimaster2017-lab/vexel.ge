@@ -46,7 +46,7 @@ const Footer = () => {
                 </svg>
                 
                 <span className="text-xl font-bold text-white font-manrope tracking-tight logo-text">
-                  Vexel
+                  Vixel
                 </span>
               </div>
               <p className="text-gray-400 mb-4">
@@ -79,7 +79,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3 mb-3">
                 <Mail className="h-5 w-5 text-green-400" />
-                <span className="text-gray-400">vexelstudio1@gmail.com</span>
+                <span className="text-gray-400">vixelgeo@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-green-400" />
@@ -96,7 +96,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2024 Vexel Geo. ყველა უფლება დაცულია.
+              © 2024 Vixel Geo. ყველა უფლება დაცულია.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="text-gray-400 hover:text-green-400 transition-colors text-sm">

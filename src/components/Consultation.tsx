@@ -62,7 +62,7 @@ const Consultation = () => {
             <div className="hidden sm:block text-white/40">•</div>
             <div className="flex items-center gap-3 text-white/90 hover:text-white transition-colors">
               <Mail className="w-5 h-5" />
-              <span className="font-medium">info@vexel.ge</span>
+                              <span className="font-medium">info@vixel.ge</span>
             </div>
           </div>
           

@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://vexel.ge/sitemap.xml
+Sitemap: https://vixel.ge/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1

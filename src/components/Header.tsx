@@ -31,7 +31,7 @@ const Header = () => {
 
   // Social media links - replace with actual URLs
   const socialLinks = {
-    messenger: "https://m.me/vexelstudio", // Replace with actual Messenger link
+            messenger: "https://m.me/vixelstudio", // Replace with actual Messenger link
     whatsapp: "https://wa.me/995599443357" // Replace with actual WhatsApp link
   };
 
