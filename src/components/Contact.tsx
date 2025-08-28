@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Phone, Mail, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Phone, Mail, Facebook, Instagram } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const Contact = () => {
@@ -48,11 +48,6 @@ const Contact = () => {
       icon: Instagram,
       name: "Instagram",
       href: "https://instagram.com"
-    },
-    {
-      icon: Linkedin,
-      name: "LinkedIn",
-      href: "https://linkedin.com"
     }
   ];
 

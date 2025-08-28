@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Code } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Code } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -58,13 +58,7 @@ const Footer = () => {
                 <Facebook className="h-5 w-5" />
               </a>
               <a href="#" className="social-link">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="social-link">
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="social-link">
-                <Linkedin className="h-5 w-5" />
               </a>
             </div>
           </div>
