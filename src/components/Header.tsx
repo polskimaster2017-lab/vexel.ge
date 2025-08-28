@@ -42,14 +42,14 @@ const Header = () => {
         : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between w-full h-16">
           {/* Logo */}
-          <div className="pl-2 md:pl-0">
+          <div className="flex items-center pl-2 md:pl-0">
             <img 
               src="/images/vixel-wordmark.svg" 
               alt="Vixel Logo" 
-              width={140} 
-              height={40} 
+              width={120} 
+              height={36} 
               className="flex-shrink-0"
             />
           </div>
