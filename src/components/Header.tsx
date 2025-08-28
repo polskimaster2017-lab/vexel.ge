@@ -50,7 +50,7 @@ const Header = () => {
               height="32" 
               viewBox="0 0 32 32" 
               className="flex-shrink-0 logo-svg"
-              aria-label="Vexel Logo"
+              aria-label="Vixel Logo"
               role="img"
             >
               <defs>
