@@ -8,46 +8,14 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="mb-6">
-              <div className="flex items-center space-x-3 mb-4 group">
-                <svg width="32" height="32" viewBox="0 0 32 32" className="flex-shrink-0 logo-svg">
-                  <defs>
-                    <linearGradient id="footerLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#5abd70" />
-                      <stop offset="100%" stopColor="#4a9d60" />
-                    </linearGradient>
-                    <filter id="footerLogoGlow">
-                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                      <feMerge> 
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  
-                  {/* Left stroke of V */}
-                  <path 
-                    d="M8 8 L16 24" 
-                    stroke="url(#footerLogoGradient)" 
-                    strokeWidth="2.5" 
-                    strokeLinecap="round"
-                    fill="none"
-                    className="logo-line left-line"
-                  />
-                  
-                  {/* Right stroke of V */}
-                  <path 
-                    d="M16 24 L24 8" 
-                    stroke="url(#footerLogoGradient)" 
-                    strokeWidth="2.5" 
-                    strokeLinecap="round"
-                    fill="none"
-                    className="logo-line right-line"
-                  />
-                </svg>
-                
-                <span className="text-xl font-bold text-white font-manrope tracking-tight logo-text">
-                  Vixel
-                </span>
+              <div className="flex items-center mb-4 group">
+                <img 
+                  src="/images/vixel-wordmark.svg" 
+                  alt="Vixel Logo" 
+                  width={140} 
+                  height={40} 
+                  className="flex-shrink-0"
+                />
               </div>
               <p className="text-gray-400 mb-4">
                 პროფესიონალური ვებ-გვერდების შექმნა და დეველოპმენტი
