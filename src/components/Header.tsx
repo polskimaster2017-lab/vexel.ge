@@ -44,7 +44,7 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between w-full h-16">
           {/* Logo */}
-          <div className="pl-2 md:pl-0">
+          <div className="flex items-center pl-2 md:pl-0">
             <img 
               src="/images/vixel-wordmark.svg" 
               alt="Vixel Logo" 
