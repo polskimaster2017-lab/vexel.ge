@@ -1491,4 +1491,9 @@ All colors MUST be HSL.
     .contact-modal-container {
       padding: 1rem;
     }
+
+    /* Make logo flush with left edge on mobile */
+    header .container .flex > div:first-child {
+      margin-left: -24px;
+    }
   }
