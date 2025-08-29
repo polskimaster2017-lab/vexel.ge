@@ -51,11 +51,11 @@ const WhyUs = () => {
           }`}>
             რატომ უნდა აირჩიო <span style={{color: '#5abd70'}}>Vixel?</span>
           </h2>
-          <p className={`text-xl text-gray-400 max-w-3xl mx-auto font-noto-georgian transition-all duration-1000 ease-out delay-300 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
-            ჩვენ ვცდილობთ, რომ თითოეული პროექტი იყოს არა უბრალოდ ვებსაიტი, არამედ ძლიერი ბიზნეს–ინსტრუმენტი. აი, რატომ ენდობიან ჩვენ:
-          </p>
+                     <p className={`text-xl text-gray-400 max-w-3xl mx-auto font-noto-georgian transition-all duration-1000 ease-out delay-300 ${
+             visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+           }`}>
+             ჩვენ ვცდილობთ, რომ თითოეული პროექტი იყოს არა უბრალოდ ვებსაიტი, არამედ ძლიერი ბიზნეს–ინსტრუმენტი. აი, რატომ გვენდობიან ჩვენ:
+           </p>
         </div>
 
         <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 transition-all duration-1000 ease-out delay-500 ${
