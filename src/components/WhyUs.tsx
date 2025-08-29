@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { useModal } from "@/contexts/ModalContext";
 
 const WhyUs = () => {
   const [visible, setVisible] = useState(false);
+  const { openContactModal } = useModal();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -84,12 +86,9 @@ const WhyUs = () => {
             👉 გსურს ვებსაიტი, რომელიც მუშაობს შენთვის? — დაგვიკავშირდი დღესვე.
           </p>
           <Button
-            onClick={() => {
-              const contactSection = document.getElementById('contact');
-              contactSection?.scrollIntoView({ behavior: 'smooth' });
-            }}
+            onClick={openContactModal}
             className="neon-button font-noto-georgian text-lg px-10 py-4 h-auto transition-all duration-300 ease-out transform hover:scale-105 group"
-            aria-label="დაგვიკავშირდი - გადადი კონტაქტის განყოფილებაში"
+            aria-label="დაგვიკავშირდი - გახსენით კონტაქტის ფორმა"
           >
             დაგვიკავშირდი
           </Button>
