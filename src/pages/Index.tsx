@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import WhyUs from "@/components/WhyUs";
 import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
 import Pricing from "@/components/Pricing";
@@ -10,6 +11,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-black">
       <Hero />
+      <WhyUs />
       <Services />
       <Portfolio />
       <Pricing />
