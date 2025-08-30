@@ -24,7 +24,7 @@ const Consultation = () => {
   }, []);
 
   const openWhatsApp = () => {
-    window.open('https://wa.me/995555123456', '_blank');
+    window.open('https://wa.me/+995571140577', '_blank');
   };
 
   return (
