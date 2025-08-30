@@ -200,15 +200,15 @@ ReactDOM.createRoot(
               titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             } text-white neon-title tracking-wide`}>
               <div className="headline-container">
-                <span className="text-white">ჩვენ ვქმნით </span>
-                <span 
+                <div className="text-white">ჩვენ ვქმნით</div>
+                <div 
                   className="word-cycler-wrapper" 
                   style={{ minWidth: containerWidth ? `${containerWidth}px` : 'auto' }}
                 >
                   <span className="word" ref={wordCyclerRef}>
                     {words[currentWordIndex]}
                   </span>
-                </span>
+                </div>
               </div>
               <div className="text-white">
                 რომლებიც <span style={{color: '#5abd70'}}>მუშაობს</span>
