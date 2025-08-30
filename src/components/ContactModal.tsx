@@ -10,18 +10,16 @@ interface FormData {
   [key: string]: string;
 }
 
-interface Web3FormsResponse {
+interface EmailResponse {
   success: boolean;
   message?: string;
+  error?: string;
 }
 
-// Константы для конфигурации
-const WEB3FORMS_ACCESS_KEY = '2d7ea600-afcc-44cb-a706-1adb588a6eac';
-
-// Validate access key format
-if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY.length < 10) {
-  console.error('Invalid Web3Forms access key:', WEB3FORMS_ACCESS_KEY);
-}
+// API endpoint configuration
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://vixel.ge' 
+  : 'http://localhost:3001';
 
 const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -96,28 +94,58 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         formObject[key] = value.toString();
       });
       
-      // Add access_key to form data
-      formObject.access_key = WEB3FORMS_ACCESS_KEY;
+      // Log network information for debugging
+      console.log('Network information:');
+      console.log('Online status:', navigator.onLine);
+      console.log('Connection effective type:', (navigator as any).connection?.effectiveType || 'Unknown');
+      console.log('Connection downlink:', (navigator as any).connection?.downlink || 'Unknown');
       
-      // Validate access key before submission
-      if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY.length < 10) {
-        throw new Error('Invalid Web3Forms access key configuration');
+      // Check if we're in production and log accordingly
+      const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+      console.log('Environment:', isProduction ? 'Production' : 'Development');
+      console.log('Current domain:', window.location.hostname);
+      console.log('Protocol:', window.location.protocol);
+      console.log('Full URL:', window.location.href);
+      console.log('Submitting form with data:', formObject);
+      console.log('API Base URL:', API_BASE_URL);
+      
+      // Additional production checks
+      if (isProduction) {
+        console.log('Production environment detected - checking SSL and CORS...');
+        if (window.location.protocol !== 'https:') {
+          console.warn('Warning: Not using HTTPS in production!');
+        }
       }
       
-      console.log('Submitting form with data:', formObject);
-      console.log('Using access key:', WEB3FORMS_ACCESS_KEY);
+      console.log('Starting fetch request to Resend API...');
+      console.log('Request URL:', `${API_BASE_URL}/api/sendEmail`);
+      console.log('Request method:', 'POST');
+      console.log('Request headers:', {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      });
+      console.log('Request body:', formObject);
+      console.log('CORS mode:', 'cors');
+      console.log('Credentials:', 'omit');
       
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch(`${API_BASE_URL}/api/sendEmail`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
         body: JSON.stringify(formObject),
+        mode: 'cors',
+        credentials: 'omit'
       });
 
+      console.log('Response received!');
       console.log('Response status:', response.status);
+      console.log('Response status text:', response.statusText);
       console.log('Response headers:', response.headers);
+      console.log('Response URL:', response.url);
+      console.log('Response type:', response.type);
+      console.log('Response redirected:', response.redirected);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -128,7 +156,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       const responseText = await response.text();
       console.log('Response text:', responseText);
       
-      let responseJson: Web3FormsResponse;
+      let responseJson: EmailResponse;
       try {
         responseJson = JSON.parse(responseText);
       } catch (parseError) {
@@ -139,7 +167,15 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       console.log('Parsed response:', responseJson);
 
       if (responseJson.success) {
-        showMessage('თქვენი მოთხოვნა გაგზავნილია!', 'success');
+        // Log success details for debugging
+        console.log('Form submitted successfully!');
+        console.log('Response details:', {
+          success: responseJson.success,
+          message: responseJson.message,
+          timestamp: new Date().toISOString()
+        });
+        
+        showMessage('წარმატებით გაიგზავნა', 'success');
         form.reset();
         
         // Close modal after 2 seconds
@@ -147,17 +183,33 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
           onClose();
         }, 2000);
       } else {
-        throw new Error(responseJson.message || 'შეცდომა მოხდა');
+        console.error('Resend API returned error:', responseJson);
+        throw new Error(responseJson.error || responseJson.message || 'შეცდომა მოხდა');
       }
     } catch (error) {
-      console.error('Submission Error:', error);
-      console.error('Error details:', {
-        name: error instanceof Error ? error.name : 'Unknown',
-        message: error instanceof Error ? error.message : 'Unknown error',
-        stack: error instanceof Error ? error.stack : 'No stack trace'
-      });
+      console.error('=== FORM SUBMISSION ERROR ===');
+      console.error('Error type:', typeof error);
+      console.error('Error constructor:', error?.constructor?.name);
+      console.error('Error name:', error instanceof Error ? error.name : 'N/A');
+      console.error('Error message:', error instanceof Error ? error.message : String(error));
+      console.error('Error stack:', error instanceof Error ? error.stack : 'N/A');
+      console.error('Environment:', window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' ? 'Production' : 'Development');
+      console.error('Domain:', window.location.hostname);
+      console.error('Protocol:', window.location.protocol);
+      console.error('User Agent:', navigator.userAgent);
+      console.error('Timestamp:', new Date().toISOString());
+      console.error('=== END ERROR DETAILS ===');
       
-      const errorMessage = error instanceof Error ? error.message : 'შეცდომა მოხდა. გთხოვთ სცადოთ თავიდან.';
+      // Handle specific error types
+      let errorMessage = 'შეცდომა მოხდა. გთხოვთ სცადოთ თავიდან.';
+      
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        errorMessage = 'ქსელის შეცდომა. შეამოწმეთ ინტერნეტ კავშირი.';
+        console.error('Network/Fetch error detected');
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      
       showMessage(errorMessage, 'error');
     } finally {
       setIsSubmitting(false);
@@ -205,17 +257,13 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         {/* Form */}
         <form 
           id="contact-form"
-          action="https://api.web3forms.com/submit" 
-          method="POST" 
+          action="https://api.web3forms.com/submit"
+          method="POST"
           onSubmit={handleSubmit} 
           className="space-y-6"
           noValidate
         >
-          <input 
-            type="hidden" 
-            name="access_key" 
-            value={WEB3FORMS_ACCESS_KEY} 
-          />
+
 
           {/* Name field */}
           <div>
