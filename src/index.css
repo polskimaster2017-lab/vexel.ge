@@ -188,18 +188,18 @@ All colors MUST be HSL.
 /* Word cycling animation */
 .headline-container {
   display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
   overflow: visible;
-  padding: 5px 0;
+  padding: 0;
 }
 
 .word-cycler-wrapper {
-  display: inline-block;
+  display: block;
   position: relative;
   height: 1.2em;
   overflow: visible;
-  vertical-align: baseline;
+  margin-top: 0.5rem;
 }
 
 .word {
@@ -215,6 +215,19 @@ All colors MUST be HSL.
 .word-is-hidden {
   opacity: 0;
   transform: translateY(1em);
+}
+
+/* Ensure consistent block layout across all screen sizes */
+@media (min-width: 375px) and (max-width: 1024px) {
+  .headline-container {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  .word-cycler-wrapper {
+    display: block !important;
+    margin-top: 0.5rem !important;
+  }
 }
 
 @layer components {
@@ -304,6 +317,12 @@ All colors MUST be HSL.
       justify-content: flex-start;
       text-align: left;
       align-items: flex-start;
+      flex-direction: column;
+    }
+    
+    .word-cycler-wrapper {
+      display: block;
+      margin-top: 0.5rem;
     }
   }
 
