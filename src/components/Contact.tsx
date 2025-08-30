@@ -42,7 +42,7 @@ const Contact = () => {
     {
       icon: Facebook,
       name: "Facebook",
-      href: "https://facebook.com"
+      href: "https://facebook.com/profile.php?id=788704920991496"
     },
     {
       icon: Instagram,

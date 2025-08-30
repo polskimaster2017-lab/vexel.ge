@@ -23,7 +23,7 @@ const Footer = () => {
               </p>
             </div>
             <div className="flex space-x-4">
-              <a href="#" className="social-link">
+              <a href="https://facebook.com/profile.php?id=788704920991496" target="_blank" rel="noopener noreferrer" className="social-link">
                 <Facebook className="h-5 w-5" />
               </a>
               <a href="#" className="social-link">
