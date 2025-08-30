@@ -6,21 +6,6 @@ interface ContactModalProps {
   onClose: () => void;
 }
 
-interface FormData {
-  [key: string]: string;
-}
-
-interface EmailResponse {
-  success: boolean;
-  message?: string;
-  error?: string;
-}
-
-// API endpoint configuration
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://vixel.ge' 
-  : 'http://localhost:3001';
-
 const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
@@ -88,93 +73,16 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         throw new Error('გთხოვთ შეიყვანოთ სწორი ელ. ფოსტა');
       }
       
-      // Convert FormData to JSON
-      const formObject: FormData = {};
-      formData.forEach((value, key) => {
-        formObject[key] = value.toString();
-      });
-      
-      // Log network information for debugging
-      console.log('Network information:');
-      console.log('Online status:', navigator.onLine);
-      console.log('Connection effective type:', (navigator as any).connection?.effectiveType || 'Unknown');
-      console.log('Connection downlink:', (navigator as any).connection?.downlink || 'Unknown');
-      
-      // Check if we're in production and log accordingly
-      const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-      console.log('Environment:', isProduction ? 'Production' : 'Development');
-      console.log('Current domain:', window.location.hostname);
-      console.log('Protocol:', window.location.protocol);
-      console.log('Full URL:', window.location.href);
-      console.log('Submitting form with data:', formObject);
-      console.log('API Base URL:', API_BASE_URL);
-      
-      // Additional production checks
-      if (isProduction) {
-        console.log('Production environment detected - checking SSL and CORS...');
-        if (window.location.protocol !== 'https:') {
-          console.warn('Warning: Not using HTTPS in production!');
-        }
-      }
-      
-      console.log('Starting fetch request to Resend API...');
-      console.log('Request URL:', `${API_BASE_URL}/api/sendEmail`);
-      console.log('Request method:', 'POST');
-      console.log('Request headers:', {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      });
-      console.log('Request body:', formObject);
-      console.log('CORS mode:', 'cors');
-      console.log('Credentials:', 'omit');
-      
-      const response = await fetch(`${API_BASE_URL}/api/sendEmail`, {
+      // Submit to Formspree
+      const response = await fetch('https://formspree.io/f/xkgvjlpk', {
         method: 'POST',
+        body: formData,
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(formObject),
-        mode: 'cors',
-        credentials: 'omit'
+          'Accept': 'application/json'
+        }
       });
 
-      console.log('Response received!');
-      console.log('Response status:', response.status);
-      console.log('Response status text:', response.statusText);
-      console.log('Response headers:', response.headers);
-      console.log('Response URL:', response.url);
-      console.log('Response type:', response.type);
-      console.log('Response redirected:', response.redirected);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('HTTP error response:', errorText);
-        throw new Error(`HTTP error! status: ${response.status}, response: ${errorText}`);
-      }
-
-      const responseText = await response.text();
-      console.log('Response text:', responseText);
-      
-      let responseJson: EmailResponse;
-      try {
-        responseJson = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error('Failed to parse JSON response:', parseError);
-        throw new Error('Invalid response format from server');
-      }
-      
-      console.log('Parsed response:', responseJson);
-
-      if (responseJson.success) {
-        // Log success details for debugging
-        console.log('Form submitted successfully!');
-        console.log('Response details:', {
-          success: responseJson.success,
-          message: responseJson.message,
-          timestamp: new Date().toISOString()
-        });
-        
+      if (response.ok) {
         showMessage('წარმატებით გაიგზავნა', 'success');
         form.reset();
         
@@ -183,30 +91,14 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
           onClose();
         }, 2000);
       } else {
-        console.error('Resend API returned error:', responseJson);
-        throw new Error(responseJson.error || responseJson.message || 'შეცდომა მოხდა');
+        throw new Error('შეცდომა! თავიდან სცადეთ.');
       }
     } catch (error) {
-      console.error('=== FORM SUBMISSION ERROR ===');
-      console.error('Error type:', typeof error);
-      console.error('Error constructor:', error?.constructor?.name);
-      console.error('Error name:', error instanceof Error ? error.name : 'N/A');
-      console.error('Error message:', error instanceof Error ? error.message : String(error));
-      console.error('Error stack:', error instanceof Error ? error.stack : 'N/A');
-      console.error('Environment:', window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' ? 'Production' : 'Development');
-      console.error('Domain:', window.location.hostname);
-      console.error('Protocol:', window.location.protocol);
-      console.error('User Agent:', navigator.userAgent);
-      console.error('Timestamp:', new Date().toISOString());
-      console.error('=== END ERROR DETAILS ===');
+      console.error('Form submission error:', error);
       
-      // Handle specific error types
-      let errorMessage = 'შეცდომა მოხდა. გთხოვთ სცადოთ თავიდან.';
+      let errorMessage = 'შეცდომა! თავიდან სცადეთ.';
       
-      if (error instanceof TypeError && error.message.includes('fetch')) {
-        errorMessage = 'ქსელის შეცდომა. შეამოწმეთ ინტერნეტ კავშირი.';
-        console.error('Network/Fetch error detected');
-      } else if (error instanceof Error) {
+      if (error instanceof Error) {
         errorMessage = error.message;
       }
       
@@ -257,14 +149,12 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         {/* Form */}
         <form 
           id="contact-form"
-          action="https://api.web3forms.com/submit"
+          action="https://formspree.io/f/xkgvjlpk"
           method="POST"
           onSubmit={handleSubmit} 
           className="space-y-6"
           noValidate
         >
-
-
           {/* Name field */}
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1 font-noto-georgian">
