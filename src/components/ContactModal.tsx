@@ -18,6 +18,11 @@ interface Web3FormsResponse {
 // Константы для конфигурации
 const WEB3FORMS_ACCESS_KEY = '2d7ea600-afcc-44cb-a706-1adb588a6eac';
 
+// Validate access key format
+if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY.length < 10) {
+  console.error('Invalid Web3Forms access key:', WEB3FORMS_ACCESS_KEY);
+}
+
 const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
@@ -91,6 +96,17 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         formObject[key] = value.toString();
       });
       
+      // Add access_key to form data
+      formObject.access_key = WEB3FORMS_ACCESS_KEY;
+      
+      // Validate access key before submission
+      if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY.length < 10) {
+        throw new Error('Invalid Web3Forms access key configuration');
+      }
+      
+      console.log('Submitting form with data:', formObject);
+      console.log('Using access key:', WEB3FORMS_ACCESS_KEY);
+      
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
@@ -100,11 +116,27 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         body: JSON.stringify(formObject),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('HTTP error response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}, response: ${errorText}`);
       }
 
-      const responseJson: Web3FormsResponse = await response.json();
+      const responseText = await response.text();
+      console.log('Response text:', responseText);
+      
+      let responseJson: Web3FormsResponse;
+      try {
+        responseJson = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('Failed to parse JSON response:', parseError);
+        throw new Error('Invalid response format from server');
+      }
+      
+      console.log('Parsed response:', responseJson);
 
       if (responseJson.success) {
         showMessage('თქვენი მოთხოვნა გაგზავნილია!', 'success');
@@ -119,6 +151,12 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       }
     } catch (error) {
       console.error('Submission Error:', error);
+      console.error('Error details:', {
+        name: error instanceof Error ? error.name : 'Unknown',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : 'No stack trace'
+      });
+      
       const errorMessage = error instanceof Error ? error.message : 'შეცდომა მოხდა. გთხოვთ სცადოთ თავიდან.';
       showMessage(errorMessage, 'error');
     } finally {
